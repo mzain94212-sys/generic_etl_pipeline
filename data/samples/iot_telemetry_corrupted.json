@@ -1,0 +1,272 @@
+[
+  {
+    "device_id": "DEV-NODE-000",
+    "client_ip": "192.168.1.10",
+    "temperature_c": 48.99,
+    "humidity_pct": "36%",
+    "reported_at": "2024-03-16T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": null
+  },
+  {
+    "device_id": "DEV-NODE-001",
+    "client_ip": "192.168.1.11",
+    "temperature_c": 91.31,
+    "humidity_pct": "44%",
+    "reported_at": "2024-03-09T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": null
+  },
+  {
+    "device_id": "DEV-NODE-002",
+    "client_ip": "192.168.1.12",
+    "temperature_c": 75.61,
+    "humidity_pct": "46%",
+    "reported_at": "2024-03-02T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "ONLINE"
+  },
+  {
+    "device_id": "DEV-NODE-003",
+    "client_ip": "192.168.1.13",
+    "temperature_c": 40.32,
+    "humidity_pct": "86%",
+    "reported_at": "2024-03-11T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "ONLINE"
+  },
+  {
+    "device_id": "DEV-NODE-004",
+    "client_ip": "192.168.1.14",
+    "temperature_c": 84.14,
+    "humidity_pct": "36%",
+    "reported_at": "2024-03-26T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": null
+  },
+  {
+    "device_id": "DEV-NODE-005",
+    "client_ip": "192.168.1.15",
+    "temperature_c": 82.08,
+    "humidity_pct": "46%",
+    "reported_at": "2024-03-28T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": null
+  },
+  {
+    "device_id": "DEV-NODE-006",
+    "client_ip": "192.168.1.16",
+    "temperature_c": 47.99,
+    "humidity_pct": "68%",
+    "reported_at": "2024-03-17T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "DEGRADED"
+  },
+  {
+    "device_id": "DEV-NODE-007",
+    "client_ip": "192.168.1.17",
+    "temperature_c": 40.75,
+    "humidity_pct": "33%",
+    "reported_at": "2024-03-09T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "OFFLINE"
+  },
+  {
+    "device_id": "DEV-NODE-008",
+    "client_ip": "192.168.1.18",
+    "temperature_c": 52.03,
+    "humidity_pct": "53%",
+    "reported_at": "2024-03-28T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "OFFLINE"
+  },
+  {
+    "device_id": "DEV-NODE-009",
+    "client_ip": "192.168.1.19",
+    "temperature_c": 88.77,
+    "humidity_pct": "38%",
+    "reported_at": "2024-03-01T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "ONLINE"
+  },
+  {
+    "device_id": "DEV-NODE-010",
+    "client_ip": "192.168.1.20",
+    "temperature_c": 48.86,
+    "humidity_pct": "65%",
+    "reported_at": "2024-03-21T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "ONLINE"
+  },
+  {
+    "device_id": "DEV-NODE-011",
+    "client_ip": "192.168.1.21",
+    "temperature_c": 59.19,
+    "humidity_pct": "51%",
+    "reported_at": "2024-03-27T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": null
+  },
+  {
+    "device_id": "DEV-NODE-012",
+    "client_ip": "192.168.1.22",
+    "temperature_c": 19.56,
+    "humidity_pct": "39%",
+    "reported_at": "2024-03-01T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "DEGRADED"
+  },
+  {
+    "device_id": "DEV-NODE-013",
+    "client_ip": "192.168.1.23",
+    "temperature_c": 52.0,
+    "humidity_pct": "89%",
+    "reported_at": "2024-03-20T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "DEGRADED"
+  },
+  {
+    "device_id": "DEV-NODE-014",
+    "client_ip": "192.168.1.24",
+    "temperature_c": 63.46,
+    "humidity_pct": "36%",
+    "reported_at": "2024-03-01T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "OFFLINE"
+  },
+  {
+    "device_id": "DEV-NODE-015",
+    "client_ip": "192.168.1.25",
+    "temperature_c": 72.51,
+    "humidity_pct": "68%",
+    "reported_at": "2024-03-16T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "DEGRADED"
+  },
+  {
+    "device_id": "DEV-NODE-016",
+    "client_ip": "192.168.1.26",
+    "temperature_c": 67.07,
+    "humidity_pct": "60%",
+    "reported_at": "2024-03-16T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "OFFLINE"
+  },
+  {
+    "device_id": "DEV-NODE-017",
+    "client_ip": "192.168.1.27",
+    "temperature_c": 45.95,
+    "humidity_pct": "36%",
+    "reported_at": "2024-03-12T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "DEGRADED"
+  },
+  {
+    "device_id": "DEV-NODE-018",
+    "client_ip": "192.168.1.28",
+    "temperature_c": 56.1,
+    "humidity_pct": "84%",
+    "reported_at": "2024-03-24T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "ONLINE"
+  },
+  {
+    "device_id": "DEV-NODE-019",
+    "client_ip": "192.168.1.29",
+    "temperature_c": 50.53,
+    "humidity_pct": "53%",
+    "reported_at": "2024-03-19T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "ONLINE"
+  },
+  {
+    "device_id": "DEV-NODE-020",
+    "client_ip": "192.168.1.30",
+    "temperature_c": 71.89,
+    "humidity_pct": "80%",
+    "reported_at": "2024-03-21T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "OFFLINE"
+  },
+  {
+    "device_id": "DEV-NODE-021",
+    "client_ip": "192.168.1.31",
+    "temperature_c": 75.15,
+    "humidity_pct": "48%",
+    "reported_at": "2024-03-28T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "OFFLINE"
+  },
+  {
+    "device_id": "DEV-NODE-022",
+    "client_ip": "192.168.1.32",
+    "temperature_c": 21.53,
+    "humidity_pct": "44%",
+    "reported_at": "2024-03-14T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "DEGRADED"
+  },
+  {
+    "device_id": "DEV-NODE-023",
+    "client_ip": "192.168.1.33",
+    "temperature_c": 92.34,
+    "humidity_pct": "44%",
+    "reported_at": "2024-03-21T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "OFFLINE"
+  },
+  {
+    "device_id": "DEV-NODE-024",
+    "client_ip": "192.168.1.34",
+    "temperature_c": 91.09,
+    "humidity_pct": "73%",
+    "reported_at": "2024-03-26T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "DEGRADED"
+  },
+  {
+    "device_id": "DEV-NODE-025",
+    "client_ip": "192.168.1.35",
+    "temperature_c": 20.77,
+    "humidity_pct": "46%",
+    "reported_at": "2024-03-02T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": null
+  },
+  {
+    "device_id": "DEV-NODE-026",
+    "client_ip": "192.168.1.36",
+    "temperature_c": 47.25,
+    "humidity_pct": "66%",
+    "reported_at": "2024-03-04T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "DEGRADED"
+  },
+  {
+    "device_id": "DEV-NODE-027",
+    "client_ip": "192.168.1.37",
+    "temperature_c": 62.62,
+    "humidity_pct": "82%",
+    "reported_at": "2024-03-18T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "OFFLINE"
+  },
+  {
+    "device_id": "DEV-NODE-028",
+    "client_ip": "192.168.1.38",
+    "temperature_c": 83.16,
+    "humidity_pct": "73%",
+    "reported_at": "2024-03-10T10:00:00Z",
+    "emergency_contact": "03001234567",
+    "status": "ONLINE"
+  },
+  {
+    "device_id": "DEV-NODE-029",
+    "client_ip": "192.168.1.39",
+    "temperature_c": 89.41,
+    "humidity_pct": "55%",
+    "reported_at": "2024-03-08T10:00:00Z",
+    "emergency_contact": "+92 321 5566778",
+    "status": "OFFLINE"
+  }
+]

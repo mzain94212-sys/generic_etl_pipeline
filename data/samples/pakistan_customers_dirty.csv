@@ -1,0 +1,10 @@
+cust_id,full_name,mob_number,user_email,patient_age,d_o_b,salary_pkr,nic_number,shipping_address,city_name,is_active,registered_datetime,notes,mostly_empty_col
+CUST-1001,  Muhammad Zain  ,03001234567,zain.dev@example.com,28.0,1996-05-14,"PKR 145,000",35201-1234567-1,"House 12, Street 4, Phase 5 DHA, Lahore",Lahore,yes,2024/01/10 10:15:30,Premium enterprise customer with priority support.,
+CUST-1002,Ali Hassan,+92 321 9876543,ali.hassan@domain.pk,34.0,15/08/1990,Rs. 95000,3520298765431,"Flat 3B, Sector F-8/3, Islamabad",Islamabad,True,2023-11-20T14:45:00,Requested SMS notification for all order dispatches.,
+CUST-1003,Fatima Noor,00923335551234,fatima.noor@pkmail.org,22.0,2002-12-01,"PKR 65,000",42101-5544332-9,"Plot 45, Block 6, PECHS, Karachi",Karachi,1,12-05-2023 09:30:00,Verified buyer on e-commerce portal.,
+CUST-1004,Usman Tariq,3451122334,usman.t@tech.com,145.0,1978/04/22,"$2,500",37405-1122334-5,"Street 9, Satellite Town, Rawalpindi",Rawalpindi,active,2024-02-01,Regular high volume transactions recorded.,
+CUST-1005,Ayesha Khan,0312-7788990,,,,"120,000.00",,"House 99, Gulberg III, Lahore",Lahore,no,2024-03-15 18:20:10,Customer opted out of marketing emails.,
+CUST-1006,Bilal Ahmed,92-301-4455667,bilal.ahmed@corporate.com,41.0,1983-09-17,"PKR 250,000",35201-9988776-3,"Office 402, Eden Tower, Main Boulevard, Lahore",Lahore,true,2023/12/30,Corporate bulk order discount applies.,
+CUST-1007,Zubair Shah,,zubair.shah@yahoo.com,31.0,1993-01-25,"Rs. 82,000",17301-3322114-7,"University Town, Peshawar",Peshawar,0,2024-01-28 11:00:00,Account under periodic compliance review.,
+CUST-1008,Sana Sheikh,0333 4445566,sana.s@consulting.pk,-10.0,1998-07-11,"PKR 110,000",61101-8877665-2,"Sector G-11/2, Islamabad",Islamabad,yes,2024-02-14 16:40:00,New registration via mobile app.,
+CUST-1001,  Muhammad Zain  ,03001234567,zain.dev@example.com,28.0,1996-05-14,"PKR 145,000",35201-1234567-1,"House 12, Street 4, Phase 5 DHA, Lahore",Lahore,yes,2024/01/10 10:15:30,Premium enterprise customer with priority support.,
