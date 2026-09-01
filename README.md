@@ -36,6 +36,10 @@ A domain-agnostic, ML-grade ETL pipeline and interactive Streamlit application t
 
 ---
 
+## Prerequisites
+Python Version: 3.14.4
+pip version: 25.1.1
+
 ## Quick Start
 
 ### 1. Installation & Environment Setup
