@@ -4,6 +4,7 @@ Performs pre/post-transformation integrity checks, schema conformance scoring,
 and generates comprehensive data quality reports.
 """
 
+import re
 from typing import Any, Dict, List, Optional
 import pandas as pd
 import numpy as np
@@ -82,6 +83,15 @@ class DataQualityValidator:
                 for v in valid_vals:
                     is_dt, _ = PatternEngine.test_datetime(str(v))
                     if is_dt:
+                        col_valid_count += 1
+                    else:
+                        col_invalid_count += 1
+
+            elif sem_type in [SemanticType.DURATION, SemanticType.TIME]:
+                check_name = "Duration Format (H:MM:SS / HH:MM:SS)"
+                for v in valid_vals:
+                    sv = str(v).strip()
+                    if re.match(r'^\d+:\d{2}(?::\d{2})?$', sv):
                         col_valid_count += 1
                     else:
                         col_invalid_count += 1

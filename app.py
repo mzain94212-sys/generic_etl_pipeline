@@ -141,6 +141,7 @@ def main():
                 "Select Sample Dataset",
                 [
                     "🇵🇰 Pakistan Customer CRM (03xx Phones, Mixed Dates, CNICs, Salaries)",
+                    "⏱️ Call Center Logs (Duration, 12-hr AM/PM times, PKR Costs)",
                     "📊 Sales & Inventory (Excel format with outliers & prices)",
                     "📡 IoT Telemetry (JSON with IPs & Temperatures)"
                 ]
@@ -177,6 +178,9 @@ def main():
                 if "Pakistan Customer" in sample_choice:
                     filepath = os.path.join(samples_dir, "pakistan_customers_dirty.csv")
                     st.session_state.es_load_config.index_name = "pakistan_customers_clean"
+                elif "Call Center" in sample_choice:
+                    filepath = os.path.join(samples_dir, "test.csv")
+                    st.session_state.es_load_config.index_name = "call_center_clean"
                 elif "Sales" in sample_choice:
                     filepath = os.path.join(samples_dir, "sales_inventory_dirty.xlsx")
                     st.session_state.es_load_config.index_name = "sales_inventory_clean"

@@ -5,6 +5,7 @@ datetimes, Pakistani CNICs, currencies, emails, booleans, and text strings.
 """
 
 import re
+import datetime
 from typing import Any, Optional, Union
 import pandas as pd
 import dateutil.parser
@@ -157,6 +158,115 @@ class GenericNormalizer:
                 return dt.strftime(target_format) if not pd.isna(dt) else null_placeholder
             except Exception:
                 return null_placeholder
+
+    @classmethod
+    def clean_duration(
+        cls, 
+        val: Any, 
+        target_format: str = "H:MM:SS", 
+        null_placeholder: Optional[str] = None
+    ) -> Optional[str]:
+        """
+        Standardize time and duration values.
+        Converts 12-hour AM/PM formats (e.g. '12:36:53 AM' -> '0:36:53', '12:36:53 PM' -> '12:36:53',
+        '01:15:30 AM' -> '1:15:30', '01:15:30 PM' -> '13:15:30', '12:00:00 AM' -> '0:00:00') into standard duration format.
+        Also handles numeric seconds, timedeltas, natural language ('1h 30m'), and standard 'H:MM:SS' strings.
+        Supports target_format: 'H:MM:SS' (e.g. '0:36:53') or 'HH:MM:SS' (e.g. '00:36:53').
+        """
+        if val is None or pd.isna(val):
+            return null_placeholder
+        
+        # If already a pandas or python timedelta / time
+        if isinstance(val, (pd.Timedelta, pd.TimedeltaIndex)):
+            total_sec = int(val.total_seconds())
+            hours = total_sec // 3600
+            minutes = (total_sec % 3600) // 60
+            seconds = total_sec % 60
+            if target_format == "HH:MM:SS":
+                return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+            return f"{hours}:{minutes:02d}:{seconds:02d}"
+
+        if isinstance(val, (datetime.time, datetime.datetime)):
+            h = val.hour
+            m = val.minute
+            s_val = val.second
+            if target_format == "HH:MM:SS":
+                return f"{h:02d}:{m:02d}:{s_val:02d}"
+            return f"{h}:{m:02d}:{s_val:02d}"
+
+        s = str(val).strip()
+        if not s or s.lower() in ['nan', 'none', 'null', 'n/a', '']:
+            return null_placeholder
+
+        # Check numeric seconds (integer or float string)
+        if s.isdigit():
+            total_sec = int(s)
+            hours = total_sec // 3600
+            minutes = (total_sec % 3600) // 60
+            seconds = total_sec % 60
+            if target_format == "HH:MM:SS":
+                return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+            return f"{hours}:{minutes:02d}:{seconds:02d}"
+
+        # 1. 12-hour format with AM/PM (e.g., '12:36:53 AM', '12:36:53 PM', '1:30:00 PM', '12:36 AM')
+        am_pm_match = re.match(r'^(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?\s*([ap]m)$', s, re.IGNORECASE)
+        if am_pm_match:
+            h = int(am_pm_match.group(1))
+            m = int(am_pm_match.group(2))
+            sec = int(am_pm_match.group(3)) if am_pm_match.group(3) is not None else 0
+            ampm = am_pm_match.group(4).lower()
+            if ampm == 'am':
+                if h == 12:
+                    h = 0
+            elif ampm == 'pm':
+                if h != 12:
+                    h += 12
+            if target_format == "HH:MM:SS":
+                return f"{h:02d}:{m:02d}:{sec:02d}"
+            return f"{h}:{m:02d}:{sec:02d}"
+
+        # 2. Match standard H:MM:SS or HH:MM:SS or H:MM (24-hour format)
+        match_24 = re.match(r'^(\d+):(\d{1,2})(?::(\d{1,2}))?$', s)
+        if match_24:
+            h = int(match_24.group(1))
+            m = int(match_24.group(2))
+            sec = int(match_24.group(3)) if match_24.group(3) is not None else 0
+            if target_format == "HH:MM:SS":
+                return f"{h:02d}:{m:02d}:{sec:02d}"
+            return f"{h}:{m:02d}:{sec:02d}"
+
+        # 3. Match natural language duration like '1h 30m 15s', '36m 53s', '45s'
+        nat_match = re.findall(r'(\d+)\s*(h|hr|hrs|hours?|m|min|mins|minutes?|s|sec|secs|seconds?)', s, re.IGNORECASE)
+        if nat_match:
+            h, m, sec = 0, 0, 0
+            for num, unit in nat_match:
+                u = unit.lower()
+                n = int(num)
+                if 'h' in u:
+                    h += n
+                elif 'm' in u:
+                    m += n
+                elif 's' in u:
+                    sec += n
+            m += sec // 60
+            sec = sec % 60
+            h += m // 60
+            m = m % 60
+            if target_format == "HH:MM:SS":
+                return f"{h:02d}:{m:02d}:{sec:02d}"
+            return f"{h}:{m:02d}:{sec:02d}"
+
+        # 4. Fallback using dateutil or date parsing if only time
+        try:
+            parsed = dateutil.parser.parse(s, fuzzy=False)
+            h = parsed.hour
+            m = parsed.minute
+            sec = parsed.second
+            if target_format == "HH:MM:SS":
+                return f"{h:02d}:{m:02d}:{sec:02d}"
+            return f"{h}:{m:02d}:{sec:02d}"
+        except Exception:
+            return s
 
     @classmethod
     def clean_currency(cls, val: Any, null_placeholder: Optional[float] = None) -> Optional[float]:

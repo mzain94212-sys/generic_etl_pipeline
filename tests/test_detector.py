@@ -50,9 +50,35 @@ def test_email_and_datetime_patterns():
     assert is_dt2 is True
 
 
+def test_duration_detection():
+    # 12-hour AM/PM times
+    assert PatternEngine.test_time_or_duration("12:36:53 AM") is True
+    assert PatternEngine.test_time_or_duration("01:15:30 PM") is True
+    assert PatternEngine.test_time_or_duration("12:00:00 AM") is True
+
+    # 24-hour / H:MM:SS format
+    assert PatternEngine.test_time_or_duration("0:36:53") is True
+    assert PatternEngine.test_time_or_duration("00:36:53") is True
+    assert PatternEngine.test_time_or_duration("14:20:00") is True
+
+    # Natural text format
+    assert PatternEngine.test_time_or_duration("36m 53s") is True
+    assert PatternEngine.test_time_or_duration("1h 30m") is True
+
+    # Invalid (Dates with dashes or non-times)
+    assert PatternEngine.test_time_or_duration("2024-01-15") is False
+    assert PatternEngine.test_time_or_duration("random_text") is False
+
+    # Fuzzy column name matcher
+    matches = SemanticColumnMatcher.match_column_name("duration")
+    assert matches[0][0] == SemanticType.DURATION
+    assert matches[0][1] >= 0.90
+
+
 if __name__ == "__main__":
     test_pakistan_phone_detection()
     test_pakistan_cnic_detection()
     test_fuzzy_column_matcher()
     test_email_and_datetime_patterns()
+    test_duration_detection()
     print("All Detector tests passed successfully!")

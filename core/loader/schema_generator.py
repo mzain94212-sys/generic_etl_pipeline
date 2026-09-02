@@ -65,7 +65,8 @@ class DynamicESMappingGenerator:
 
             elif sem_type in [SemanticType.CATEGORICAL, SemanticType.GENDER, 
                             SemanticType.CITY, SemanticType.COUNTRY, 
-                            SemanticType.POSTAL_CODE]:
+                            SemanticType.POSTAL_CODE, SemanticType.DURATION, 
+                            SemanticType.TIME]:
                 properties[col] = {
                     "type": "keyword"
                 }

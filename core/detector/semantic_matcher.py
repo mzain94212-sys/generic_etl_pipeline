@@ -119,6 +119,11 @@ class SemanticColumnMatcher:
         SemanticType.TIME: [
             "time", "time_of_day", "hh_mm_ss", "punch_time", "check_in_time", "check_out_time", "waqt"
         ],
+        SemanticType.DURATION: [
+            "duration", "call_duration", "session_duration", "trip_duration", "run_time",
+            "runtime", "elapsed_time", "elapsed", "length", "watch_time", "total_duration",
+            "interval", "muddat", "duration_seconds", "duration_mins"
+        ],
         SemanticType.YEAR: [
             "year", "yr", "birth_year", "model_year", "fiscal_year", "sal", "academic_year"
         ],

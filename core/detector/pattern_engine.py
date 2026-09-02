@@ -22,6 +22,9 @@ class PatternEngine:
     RE_IPV4 = re.compile(r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')
     RE_IPV6 = re.compile(r'^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$', re.IGNORECASE)
     RE_URL = re.compile(r'^(?:https?:\/\/|ftp:\/\/|www\.)[^\s\/$.?#].[^\s]*$', re.IGNORECASE)
+    RE_TIME_12H = re.compile(r'^\d{1,2}:\d{2}(?::\d{2})?\s*[ap]m$', re.IGNORECASE)
+    RE_TIME_24H = re.compile(r'^\d{1,3}:\d{2}(?::\d{2})?$')
+    RE_DURATION_TEXT = re.compile(r'^(?:\d+\s*(?:h|hr|hrs|hours?|m|min|mins|minutes?|s|sec|secs|seconds?)\s*)+$', re.IGNORECASE)
     RE_ADDRESS_KEYWORDS = re.compile(r'\b(street|st|road|rd|avenue|ave|lane|ln|sector|block|phase|house|h#|flat|apt|plot|mohallah|colony|dha|bahria)\b', re.IGNORECASE)
 
     BOOLEAN_VALUES = {'true', 'false', 'yes', 'no', 'y', 'n', '1', '0', 't', 'f', 'active', 'inactive', 'pass', 'fail'}
@@ -79,6 +82,23 @@ class PatternEngine:
             return True, "standard_datetime"
         except (ValueError, OverflowError, TypeError):
             return False, None
+
+    @classmethod
+    def test_time_or_duration(cls, val: str) -> bool:
+        """Check if value matches standard time (12h AM/PM or 24h) or duration syntax."""
+        val_s = val.strip()
+        if not val_s:
+            return False
+        # Disqualify if full date indicators are present
+        if '-' in val_s or '/' in val_s:
+            return False
+        if bool(cls.RE_TIME_12H.match(val_s)):
+            return True
+        if bool(cls.RE_TIME_24H.match(val_s)):
+            return True
+        if bool(cls.RE_DURATION_TEXT.match(val_s)):
+            return True
+        return False
 
     @classmethod
     def test_currency(cls, val: str) -> bool:
@@ -157,51 +177,40 @@ class PatternEngine:
             elif cls.test_email(val):
                 counts[SemanticType.EMAIL] += 1
 
-            # 5. DateTime
-            is_dt, _ = cls.test_datetime(val)
-            if is_dt:
-                counts[SemanticType.DATETIME] += 1
+            # 5. Time & Duration (check before generic datetime)
+            elif cls.test_time_or_duration(val):
+                counts[SemanticType.DURATION] += 1
+                counts[SemanticType.TIME] += 1
 
-            # 6. Currency
-            elif cls.test_currency(val):
-                counts[SemanticType.CURRENCY_AMOUNT] += 1
-
-            # 7. Percentage
-            elif cls.test_percentage(val):
-                counts[SemanticType.PERCENTAGE] += 1
-
-            # 8. IP & URL
-            elif cls.test_ip_address(val):
-                counts[SemanticType.IP_ADDRESS] += 1
-            elif cls.test_url(val):
-                counts[SemanticType.URL] += 1
-
-            # 9. Boolean
-            elif val.lower() in cls.BOOLEAN_VALUES:
-                counts[SemanticType.BOOLEAN] += 1
-
-            # 10. Gender
-            elif val.lower() in cls.GENDER_VALUES:
-                counts[SemanticType.GENDER] += 1
-
-            # 11. Age
-            elif cls.test_age(val):
-                counts[SemanticType.AGE] += 1
-
-            # 12. Address
-            elif cls.test_address(val):
-                counts[SemanticType.ADDRESS] += 1
-
-            # 13. Numeric Integer
-            elif val.isdigit() or (val.startswith('-') and val[1:].isdigit()):
-                counts[SemanticType.NUMERIC_INTEGER] += 1
-            else:
-                # 14. Numeric Float
-                try:
-                    float(val)
-                    counts[SemanticType.NUMERIC_FLOAT] += 1
-                except ValueError:
-                    pass
+            # 6. DateTime
+            elif True:
+                is_dt, _ = cls.test_datetime(val)
+                if is_dt:
+                    counts[SemanticType.DATETIME] += 1
+                elif cls.test_currency(val):
+                    counts[SemanticType.CURRENCY_AMOUNT] += 1
+                elif cls.test_percentage(val):
+                    counts[SemanticType.PERCENTAGE] += 1
+                elif cls.test_ip_address(val):
+                    counts[SemanticType.IP_ADDRESS] += 1
+                elif cls.test_url(val):
+                    counts[SemanticType.URL] += 1
+                elif val.lower() in cls.BOOLEAN_VALUES:
+                    counts[SemanticType.BOOLEAN] += 1
+                elif val.lower() in cls.GENDER_VALUES:
+                    counts[SemanticType.GENDER] += 1
+                elif cls.test_age(val):
+                    counts[SemanticType.AGE] += 1
+                elif cls.test_address(val):
+                    counts[SemanticType.ADDRESS] += 1
+                elif val.isdigit() or (val.startswith('-') and val[1:].isdigit()):
+                    counts[SemanticType.NUMERIC_INTEGER] += 1
+                else:
+                    try:
+                        float(val)
+                        counts[SemanticType.NUMERIC_FLOAT] += 1
+                    except ValueError:
+                        pass
 
         # Compute ratios
         ratios = {sem_type: count / total for sem_type, count in counts.items() if count > 0}

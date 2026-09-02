@@ -56,6 +56,9 @@ class GenericETLPipeline:
             elif sem_type in [SemanticType.DATETIME, SemanticType.DATE]:
                 imp_strat = ImputationStrategy.FORWARD_FILL
                 out_strat = OutlierStrategy.NONE
+            elif sem_type in [SemanticType.TIME, SemanticType.DURATION]:
+                imp_strat = ImputationStrategy.CONSTANT
+                out_strat = OutlierStrategy.NONE
             else:
                 imp_strat = ImputationStrategy.CONSTANT
                 out_strat = OutlierStrategy.NONE
@@ -71,6 +74,8 @@ class GenericETLPipeline:
                 standardize_phone=is_phone,
                 phone_prefix="92",  # Default: 923XXXXXXXXX
                 standardize_datetime=sem_type in [SemanticType.DATETIME, SemanticType.DATE],
+                standardize_duration=sem_type in [SemanticType.TIME, SemanticType.DURATION],
+                duration_target_format="H:MM:SS",
                 strip_whitespace=True,
                 remove_currency_symbols=sem_type == SemanticType.CURRENCY_AMOUNT
             )
@@ -145,6 +150,13 @@ class GenericETLPipeline:
                     lambda v: GenericNormalizer.clean_datetime(v, target_format=cfg.datetime_target_format)
                 )
                 transform_logs.append(f"Standardized datetime column '{col}' to format '{cfg.datetime_target_format}'")
+
+            # Duration / Time Normalization
+            elif sem_type in [SemanticType.DURATION, SemanticType.TIME] and cfg.standardize_duration:
+                df_transformed[col] = df_transformed[col].apply(
+                    lambda v: GenericNormalizer.clean_duration(v, target_format=cfg.duration_target_format)
+                )
+                transform_logs.append(f"Standardized duration column '{col}' to format '{cfg.duration_target_format}'")
 
             # Currency Normalization
             elif sem_type == SemanticType.CURRENCY_AMOUNT and cfg.remove_currency_symbols:

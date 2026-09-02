@@ -27,6 +27,7 @@ class SemanticType(str, Enum):
     DATETIME = "datetime"
     DATE = "date"
     TIME = "time"
+    DURATION = "duration"
     YEAR = "year"
     TIMESTAMP_EPOCH = "timestamp_epoch"
 
@@ -126,6 +127,8 @@ class ColumnCleanConfig:
     phone_prefix: str = "92"  # or "+92" or "03"
     standardize_datetime: bool = True
     datetime_target_format: str = "%Y-%m-%d %H:%M:%S"
+    standardize_duration: bool = True
+    duration_target_format: str = "H:MM:SS"
     strip_whitespace: bool = True
     normalize_casing: Optional[str] = None  # 'lower', 'upper', 'title', None
     remove_currency_symbols: bool = True

@@ -1,0 +1,9 @@
+call_id,caller_name,phone_number,call_date,duration,cost_pkr,call_type,status
+101,Muhammad Zain,03001234567,2024-03-01,12:36:53 AM,PKR 150,Inbound,completed
+102,Ali Hassan,+92 321 9876543,2024-03-01,01:15:30 PM,Rs. 45,Outbound,completed
+103,Fatima Noor,00923335551234,2024-03-02,12:00:00 AM,0,Inbound,missed
+104,Usman Tariq,3451122334,2024-03-02,0:45:20,PKR 60,Outbound,completed
+105,Ayesha Khan,0312-7788990,2024-03-03,12:36:53 AM,PKR 150,Inbound,completed
+106,Bilal Ahmed,92-301-4455667,2024-03-03,02:10:15 PM,PKR 210,Outbound,completed
+107,Zubair Shah,03334445566,2024-03-04,00:15:45,Rs. 30,Inbound,completed
+108,Sana Sheikh,+923001122334,2024-03-04,11:59:59 PM,PKR 350,Inbound,completed

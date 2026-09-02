@@ -170,7 +170,16 @@ class GenericTypeDetector:
             notes.append("RFC 5322 email addresses verified")
             return SemanticType.EMAIL, min(1.0, conf + 0.1), "email@domain.com", notes
 
-        # 4. Check Datetime / Date
+        # 4. Check Duration / Time
+        duration_ratio = pattern_ratios.get(SemanticType.DURATION, 0.0)
+        time_ratio = pattern_ratios.get(SemanticType.TIME, 0.0)
+        if duration_ratio > 0.40 or (duration_ratio > 0.20 and top_name_type in [SemanticType.DURATION, SemanticType.TIME]) or (top_name_type in [SemanticType.DURATION, SemanticType.TIME] and name_score > 0.65):
+            conf = (0.6 * max(duration_ratio, time_ratio)) + (0.4 * (name_score if top_name_type in [SemanticType.DURATION, SemanticType.TIME] else 0.5))
+            target_type = SemanticType.DURATION if top_name_type == SemanticType.DURATION else SemanticType.TIME
+            notes.append(f"Time duration / elapsed time format identified ({max(duration_ratio, time_ratio) * 100:.1f}% sample match)")
+            return target_type, min(1.0, conf + 0.15), "H:MM:SS / Duration", notes
+
+        # 5. Check Datetime / Date
         dt_ratio = pattern_ratios.get(SemanticType.DATETIME, 0.0)
         if dt_ratio > 0.60 or (dt_ratio > 0.30 and top_name_type in [SemanticType.DATETIME, SemanticType.DATE]):
             conf = (0.6 * dt_ratio) + (0.4 * name_score)
